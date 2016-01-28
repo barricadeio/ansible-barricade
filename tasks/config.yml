@@ -1,0 +1,2 @@
+- template: src=barricade.cfg.j2 dest=/etc/barricade/barricade.cfg
+  notify: restart barricade

@@ -1,0 +1,170 @@
+[barricade]
+#
+# Barricade Network and Application Monitoring configuration file.
+#
+# Lines that beging with a # are comment lines and are ignored by the
+# network monitor. Any command line option overrides these configurations.
+#
+# Parameter: license_key
+# Value:     A 40-character hexadecimal string provided by Barricade.io. This
+#            parameter is required for all transactions and in order for the
+#            security monitor to start.
+#
+{% if barricade_config_automation_key is defined and barricade_config_automation_key %}
+license_key={{ barricade_config_automation_key }}
+{% endif %}
+
+#
+# Parameter: tag
+# Value:     An arbitrary scalar value that will be used by you and your
+#            team to effectively "tag" results sent to the Barricade platform.
+#
+#            This can be used to tag "development, staging, production" environments,
+#            "commit" versions, it could be dates, etc.
+# Default:   production
+# Docs:      https://docs.barricade.io/help_center/platform/tags
+{% if barricade_config_tag is defined and barricade_config_tag %}
+tag={{ barricade_config_tag }}
+{% endif %}
+
+#
+# Parameter: filter
+# Value:     The default network filter which is compatible with libpcap's
+#            format (i.e. "port not 53 and port not 22" to stop listening for
+#            DNS and SSH requests.
+# Warning:   Stopping the collection of services means that attacks on said services
+#            will not be detected.
+#
+#
+{% if barricade_config_filter is defined and barricade_config_filter %}
+filter={{ barricade_config_filter }}
+{% endif %}
+
+#
+# Parameter: collector_host
+# Value:     The domain name of the Barricade collector hostname to connect to. Changing
+#            this value, unless advised by a member of Barricade is likely to result in a
+#            loss of data if the hostname is not properly configured.
+# Default:   collect.barricade.io
+#
+{% if barricade_config_collector_host is defined and barricade_config_collector_host %}
+collector_host={{ barricade_config_collector_host }}
+{% endif %}
+
+#
+# Parameter: collector_port
+# Value:     The port to use on the collector. Should you wish to play with a mock
+#            server to see what's going to the Barricade services, you can develop
+#            a simple webserver and specify the port here.
+# Default:   443
+#
+{% if barricade_config_collector_port is defined and barricade_config_collector_port %}
+collector_port={{ barricade_config_collector_port }}
+{% endif %}
+
+#
+# Parameter: loglevel
+# Value:     The level of logging information about the agent to store.
+#            The possible values are broken down as follow:
+#                error        -> Show errors only
+#                warning      -> Show errors and warnings
+#                info         -> Show additional information messages
+#                verbose      -> Show detailed information messages
+#                debug        -> Show agent-debug messages
+#                verbosedebug -> Show very detailed agent-level debug messages
+# Default:   warning
+#
+{% if barricade_config_loglevel is defined and barricade_config_loglevel %}
+loglevel={{ barricade_config_loglevel }}
+{% endif %}
+
+#
+# Parameter: ssl
+# Value:     This indicates whether or not we want to attempt to
+#            to decrypt the SSl encrypted data before sending it
+#            to the collector.
+# Default:   false
+# Note:      This is useful if you are interested in further preventing
+#            attacks that happen over HTTPs (https://...)
+#
+{% if barricade_config_ssl is defined and barricade_config_ssl %}
+ssl={{ barricade_config_ssl }}
+{% endif %}
+
+#
+# Parameter: ssl_ca_bundle
+# Value:     This contains the name of the PEM-encoded certificate-authority (CA)
+#            bundle to use for SSL connection protection. The agent will attempt
+#            to find the SSL certificate on its own by looking into the most common
+#            location where one usually finds it.
+# Default:   /etc/ssl/certs/ca-certificates.crt
+#
+{% if barricade_config_ssl_ca_bundle is defined and barricade_config_ssl_ca_bundle %}
+ssl_ca_bundle={{ barricade_config_ssl_ca_bundle }}
+{% endif %}
+
+#
+# Parameter: ssl_ca_path
+# Value:    If your SSL configuration does not use CA bundles but has a directory
+#           containing multiple PEM-encoded Certificate Authority files, configure
+#           this option to point to the directory with the CA files.
+# Default:  /etc/ssl/certs
+#
+{% if barricade_config_ssl_ca_path is defined and barricade_config_ssl_ca_path %}
+ssl_ca_path={{ barricade_config_ssl_ca_path }}
+{% endif %}
+
+#
+# Parameter: ssl_check_hostname
+# Value:	 Verify that the collector host matches the SSL cert common name.
+# Default:   yes
+#
+{% if barricade_config_ssl_check_hostname is defined and barricade_config_ssl_check_hostname %}
+ssl_check_hostname={{ barricade_config_ssl_check_hostname }}
+{% endif %}
+
+#
+# Parameter: flush_frequency
+# Value:     How often (in seconds) events should be send to the collector.
+#            Events are batched together to make the traffic output more uniformly
+#            distributed for varying ingress. The more frequently data is flushed,
+#            the more up to date a picture of your network Barricade has.
+#            On low resource systems, it may be helpful to make flushes less frequently.
+# Default:   0.01
+{% if barricade_config_flush_frequency is defined and barricade_config_flush_frequency %}
+flush_frequency={{ barricade_config_flush_frequency }}
+{% endif %}
+
+#
+# Parameter: id_path
+# Value:     The path to the server id file. This contains a unique identifier for the agent on
+#            a particular server. Normally, this is autogenerated.
+# Default:   /etc/barricade/id
+#
+{% if barricade_config_id_path is defined and barricade_config_id_path %}
+id_path={{ barricade_config_id_path }}
+{% endif %}
+
+#
+# Parameter: spooler_memory
+# Value:     Amount of system memory (in MB) to use for buffering data.
+#            This is to prevent inundating your server with requests to Barricade under unusual traffic conditions.
+#            The default is calulcated based on available system memory, and may need to be tuned for performance.
+#
+# Default:   <system dependent>
+#
+{% if barricade_config_spooler_memory is defined and barricade_config_spooler_memory %}
+spooler_memory={{ barricade_config_spooler_memory }}
+{% endif %}
+
+#
+# Parameter: api_host
+# Value:     Barricade API host.
+#            The agent communicates to this API to retrieve information like whether the agent should be enabled or disabled, etc.
+#
+# Default:   https://app.barricade.io
+#
+{% if barricade_config_api_host is defined and barricade_config_api_host %}
+api_host={{ barricade_config_api_host }}
+{% endif %}
+

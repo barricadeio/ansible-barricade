@@ -1,0 +1,2 @@
+- name: restart barricade
+  action: service name=barricade state=restarted

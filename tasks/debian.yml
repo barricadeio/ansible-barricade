@@ -1,0 +1,5 @@
+- include: debian-install.yml
+  when: barricade_state == "present"
+
+- include: debian-remove.yml
+  when: barricade_state == "absent"

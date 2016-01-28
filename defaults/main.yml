@@ -1,0 +1,19 @@
+barricade_automation_key: ""
+barricade_state: present
+barricade_install_sh: "https://app.barricade.io/install/{{ barricade_automation_key }}/install.sh"
+
+
+barricade_config_automation_key: "{{ barricade_automation_key }}"
+barricade_config_tag: "production"
+barricade_config_filter: ""
+barricade_config_collector_host: "collect.barricade.io"
+barricade_config_collector_port: "443"
+barricade_config_loglevel: "warning"
+barricade_config_ssl: "yes"
+barricade_config_ssl_ca_bundle: ""
+barricade_config_ssl_ca_path: ""
+barricade_config_ssl_check_hostname: "yes"
+barricade_config_flush_frequency: "0.01"
+barricade_config_id_path: "/etc/barricade/id"
+barricade_config_spooler_memory: ""
+barricade_config_api_host: "https://app.barricade.io/api"

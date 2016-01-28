@@ -1,0 +1,5 @@
+- include: redhat-install.yml
+  when: barricade_state == "present"
+
+- include: redhat-remove.yml
+  when: barricade_state == "absent"
